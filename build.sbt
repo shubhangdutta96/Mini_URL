@@ -4,5 +4,30 @@ ThisBuild / scalaVersion := "2.13.14"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "Mini_URL"
+    name := "Mini_URL",
+    libraryDependencies ++= Seq(
+      // Akka HTTP & Akka Streams
+      "com.typesafe.akka" %% "akka-http"                % "10.2.10",
+      "com.typesafe.akka" %% "akka-stream"              % "2.6.20",
+      "com.typesafe.akka" %% "akka-actor-typed"         % "2.6.20",
+      "com.typesafe.akka" %% "akka-http-spray-json"     % "10.2.10",
+
+      // PureConfig
+      "com.github.pureconfig" %% "pureconfig"           % "0.17.4",
+
+      // Slick (Functional Relational Mapping)
+      "com.typesafe.slick" %% "slick"                   % "3.4.1",
+      "com.typesafe.slick" %% "slick-hikaricp"          % "3.4.1",
+
+      // PostgreSQL JDBC Driver
+      "org.postgresql" % "postgresql"                   % "42.7.1",
+
+      // Logging
+      "ch.qos.logback" % "logback-classic"              % "1.4.11",
+      "org.slf4j"      % "slf4j-api"                    % "2.0.9",
+
+      // Akka HTTP Testkit (Optional - for testing)
+      "com.typesafe.akka" %% "akka-http-testkit"        % "10.2.10" % Test,
+      "com.typesafe.akka" %% "akka-actor-testkit-typed" % "2.6.20" % Test
+    )
   )
