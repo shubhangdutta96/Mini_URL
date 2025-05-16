@@ -11,6 +11,7 @@ lazy val root = (project in file("."))
       "com.typesafe.akka" %% "akka-stream"              % "2.6.20",
       "com.typesafe.akka" %% "akka-actor-typed"         % "2.6.20",
       "com.typesafe.akka" %% "akka-http-spray-json"     % "10.2.10",
+      "net.liftweb" %% "lift-json" % "3.4.0",
 
       // PureConfig
       "com.github.pureconfig" %% "pureconfig"           % "0.17.4",
