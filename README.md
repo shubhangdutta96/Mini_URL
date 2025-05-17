@@ -23,5 +23,5 @@ A simple URL shortener service built using **Scala**, **Akka HTTP**, and **Slick
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/shubhangdutta96/url-shortener.git
+git clone https://github.com/shubhangdutta96/Mini_URL.git
 cd url-shortener
