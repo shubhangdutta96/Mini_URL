@@ -24,4 +24,3 @@ A simple URL shortener service built using **Scala**, **Akka HTTP**, and **Slick
 
 ```bash
 git clone https://github.com/shubhangdutta96/Mini_URL.git
-cd url-shortener
