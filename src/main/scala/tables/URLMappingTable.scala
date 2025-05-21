@@ -9,7 +9,7 @@ import java.sql.Timestamp
 import java.time.ZonedDateTime
 
 class URLMappingTable(tag: Tag) extends Table[URLMapping](tag, "urls") {
-  import URLMappingTable.zonedDateTimeColumnType // ✅ bring implicit into scope
+  import URLMappingTable.zonedDateTimeColumnType
 
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
@@ -29,7 +29,6 @@ class URLMappingTable(tag: Tag) extends Table[URLMapping](tag, "urls") {
 object URLMappingTable {
   val table = TableQuery[URLMappingTable]
 
-  // ✅ Put the implicit here — inside the companion object
   implicit val zonedDateTimeColumnType: JdbcType[ZonedDateTime] with BaseTypedType[ZonedDateTime] =
     MappedColumnType.base[ZonedDateTime, Timestamp](
       zdt => Timestamp.from(zdt.toInstant),
