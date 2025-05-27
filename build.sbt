@@ -27,8 +27,14 @@ lazy val root = (project in file("."))
       "ch.qos.logback" % "logback-classic"              % "1.4.11",
       "org.slf4j"      % "slf4j-api"                    % "2.0.9",
 
-      // Akka HTTP Testkit (Optional - for testing)
-      "com.typesafe.akka" %% "akka-http-testkit"        % "10.2.10" % Test,
-      "com.typesafe.akka" %% "akka-actor-testkit-typed" % "2.6.20" % Test
-    )
+    assembly / assemblyJarName := "url_shortener_service.jar",
+
+    assembly / assemblyMergeStrategy := {
+      case PathList("META-INF", _ @ _*) => MergeStrategy.discard
+      case "reference.conf"             => MergeStrategy.concat
+      case _                            => MergeStrategy.first
+    }
   )
+enablePlugins(AssemblyPlugin)
+enablePlugins(DockerPlugin)
+enablePlugins(JavaAppPackaging)
