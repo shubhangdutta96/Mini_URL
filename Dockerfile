@@ -1,18 +1,12 @@
-# Use OpenJDK 11 runtime image
-FROM openjdk:11-jre-slim
-
-# Set the working directory inside the container
+# Stage 1: Build the fat JAR
+FROM sbtscala/scala-sbt:eclipse-temurin-alpine-22_36_1.10.2_2.13.14 AS builder
 WORKDIR /app
+COPY . .
+RUN sbt assembly
 
-# Copy the fat JAR file into the container
-COPY target/scala-2.13/url_shortener_service.jar app.jar
-
-# Expose the port your Akka HTTP app listens on
+# Stage 2: Run the app
+FROM openjdk:11-ea-23-jre-slim
+WORKDIR /app
+COPY --from=builder /app/target/scala-2.13/mini_url-assembly-0.1.0-SNAPSHOT.jar mini_url-assembly-0.1.0-SNAPSHOT.jar
 EXPOSE 8080
-
-# Run the jar
-CMD ["java", "-jar", "app.jar"]
-
-
-
-// shubhang dutta
+CMD ["java", "-jar", "mini_url-assembly-0.1.0-SNAPSHOT.jar"]

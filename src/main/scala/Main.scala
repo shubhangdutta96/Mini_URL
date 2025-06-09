@@ -6,7 +6,8 @@ import actors.urlActor
 
 import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContextExecutor
-import scala.io.StdIn
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -18,26 +19,20 @@ object Main {
     // Create routes and start the HTTP server
     val route: Route = new urlRoutes(system).routes
 
-    val host = "localhost"
+    val host = "0.0.0.0"
     val port = 8080
 
     val bindingFuture = Http().newServerAt(host, port).bind(route)
 
     bindingFuture.onComplete {
       case Success(_) =>
-        println(s"Server online at http://$host:$port/\nPress RETURN to stop...")
+        println(s"Server online at http://$host:$port/")
       case Failure(ex) =>
         println(s"Failed to bind HTTP server: ${ex.getMessage}")
         system.terminate()
     }
 
-    // Gracefully shutdown on user input
-    StdIn.readLine()
-    bindingFuture
-      .flatMap(_.unbind())
-      .onComplete(_ => {
-        println("Server stopped")
-        system.terminate()
-      })
+    // Keep the server running until terminated
+    Await.result(system.whenTerminated, Duration.Inf)
   }
 }
