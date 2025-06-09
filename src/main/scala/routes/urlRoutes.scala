@@ -40,7 +40,8 @@ class urlRoutes(urlActor: ActorRef[Query])(implicit val system: ActorSystem[_]) 
       path(Segment) { shortCode =>
         get {
           onSuccess(getOriginalUrl(shortCode)) {
-            case a@ApplicationResponse(code, url, _) if code == StatusCodes.Found.intValue =>
+            case a@ApplicationResponse(code, url, _)
+              if code == StatusCodes.Found.intValue =>
 //              redirect(Uri(url.toString), StatusCodes.Found)
               complete(HttpResponse(
                 status = StatusCode.int2StatusCode(code),

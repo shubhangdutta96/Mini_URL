@@ -104,6 +104,7 @@ object urlHandler extends JsonFormats with SprayJsonSupport {
             val updatedQuery = urlsTable.filter(_.id === entry.id.get).map(_.clickCount).update(updatedClickCount)
 
             db.run(updatedQuery).map {_ =>
+              println(entry.originalUrl)
               ApplicationResponse(StatusCodes.Found.intValue, entry.originalUrl, s"Redirecting")
             }
         }
@@ -134,3 +135,4 @@ object urlHandler extends JsonFormats with SprayJsonSupport {
     }
   }
 }
+/// ssxdcfvgbhnjmhh
