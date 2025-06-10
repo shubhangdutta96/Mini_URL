@@ -8,5 +8,6 @@ RUN sbt assembly
 FROM openjdk:11-ea-23-jre-slim
 WORKDIR /app
 COPY --from=builder /app/target/scala-2.13/mini_url-assembly-0.1.0-SNAPSHOT.jar mini_url-assembly-0.1.0-SNAPSHOT.jar
+COPY --from=builder /app /app
 EXPOSE 8080
 CMD ["java", "-jar", "mini_url-assembly-0.1.0-SNAPSHOT.jar"]
