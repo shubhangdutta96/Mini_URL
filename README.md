@@ -17,6 +17,7 @@ A simple URL shortener service built using **Scala**, **Akka HTTP**, and **Slick
 - **Database:** PostgreSQL  
 - **ORM:** Slick  
 - **JSON:** Spray JSON / Lift JSON
+- **Containerization:** Docker (see `docker-compose.yml` and `Dockerfile`)
 
 ## Run Locally
 
@@ -24,3 +25,8 @@ A simple URL shortener service built using **Scala**, **Akka HTTP**, and **Slick
 
 ```bash
 git clone https://github.com/shubhangdutta96/Mini_URL.git
+```
+## 🐳 Configuration to run the service on docker container 
+```bash
+docker-compose up -d
+```
